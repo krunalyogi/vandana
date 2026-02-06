@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Rose Day, Vandana ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pastel-pink: #FFE5EC;
+            --soft-pink: #FFB3C6;
+            --pastel-red: #FF8FAB;
+            --deep-rose: #FB6F92;
+            --white: #FFFFFF;
+            --text-dark: #4A4A4A;
+            --text-light: #8B8B8B;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--white) 0%, var(--pastel-pink) 100%);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Floating Roses Background */
+        .floating-roses {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-rose {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-50px) rotate(180deg);
+            }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--deep-rose);
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        /* Blooming Rose Section */
+        .blooming-section {
+            text-align: center;
+            margin: 4rem 0;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .rose-wrapper {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .rose-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        .rose-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        /* SVG Rose */
+        #roseBloom {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 30px rgba(251, 111, 146, 0.3));
+            transition: filter 0.5s ease;
+        }
+
+        #roseBloom.blooming {
+            filter: drop-shadow(0 15px 50px rgba(251, 111, 146, 0.6));
+        }
+
+        /* Glow Effect */
+        .rose-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(251, 111, 146, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 1s ease;
+            pointer-events: none;
+        }
+
+        .rose-glow.active {
+            opacity: 1;
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Falling Petals */
+        .falling-petal {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .falling-petal svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 2px 8px rgba(251, 111, 146, 0.4));
+        }
+
+        @keyframes petalFall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg) translateX(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(350px) rotate(720deg) translateX(80px);
+            }
+        }
+
+        .bloom-message {
+            margin-top: 2rem;
+            font-size: 1.8rem;
+            color: var(--deep-rose);
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        .bloom-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .bloom-hint {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-top: 1rem;
+            font-style: italic;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Typewriter Section */
+        .typewriter-section {
+            text-align: center;
+            margin: 5rem 0;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(251, 111, 146, 0.1);
+            animation: fadeInUp 1s ease-out 0.5s backwards;
+        }
+
+        .typewriter-text {
+            font-size: 1.8rem;
+            color: var(--deep-rose);
+            font-weight: 500;
+            min-height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .typewriter-text::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Love Notes Section */
+        .love-notes-section {
+            margin: 5rem 0;
+            animation: fadeIn 1s ease-out 1s backwards;
+        }
+
+        .love-notes-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--deep-rose);
+            margin-bottom: 3rem;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .note-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(251, 111, 146, 0.15);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .note-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--pastel-red) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .note-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(251, 111, 146, 0.25);
+        }
+
+        .note-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .note-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .note-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .note-front {
+            transition: opacity 0.3s ease;
+        }
+
+        .note-back {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 1.1rem;
+            color: var(--deep-rose);
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .note-card.revealed .note-front {
+            opacity: 0;
+        }
+
+        .note-card.revealed .note-back {
+            opacity: 1;
+        }
+
+        /* Virtual Rose Delivery */
+        .delivery-section {
+            margin: 5rem 0;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1s ease-out 1.5s backwards;
+        }
+
+        .delivery-rose {
+            font-size: 6rem;
+            opacity: 0;
+            transform: translateX(-100vw) rotate(-45deg);
+        }
+
+        .delivery-rose.delivering {
+            animation: deliverRose 2s ease-out forwards;
+        }
+
+        @keyframes deliverRose {
+            0% {
+                opacity: 0;
+                transform: translateX(-100vw) rotate(-45deg);
+            }
+
+            70% {
+                opacity: 1;
+                transform: translateX(20px) rotate(10deg);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0) rotate(0deg);
+            }
+        }
+
+        .delivery-message {
+            font-size: 1.5rem;
+            color: var(--deep-rose);
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .delivery-message.show {
+            animation: fadeInUp 0.8s ease-out 2s forwards;
+        }
+
+        /* Surprise Section */
+        .surprise-section {
+            text-align: center;
+            margin: 5rem 0;
+            animation: fadeIn 1s ease-out 2s backwards;
+        }
+
+        .surprise-button {
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--pastel-red) 100%);
+            color: var(--white);
+            border: none;
+            padding: 1.5rem 3rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(251, 111, 146, 0.3);
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .surprise-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(251, 111, 146, 0.4);
+        }
+
+        .surprise-button:active {
+            transform: translateY(-2px);
+        }
+
+        /* Surprise Modal */
+        .surprise-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 229, 236, 0.98);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .surprise-modal.active {
+            display: flex;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .surprise-content {
+            text-align: center;
+            padding: 3rem;
+            max-width: 800px;
+        }
+
+        .bouquet {
+            font-size: 8rem;
+            margin-bottom: 2rem;
+            animation: bouquetAppear 1s ease-out;
+        }
+
+        @keyframes bouquetAppear {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(-180deg);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .surprise-message {
+            font-size: 1.8rem;
+            color: var(--deep-rose);
+            font-weight: 500;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.5s backwards;
+        }
+
+        .close-surprise {
+            margin-top: 2rem;
+            background: var(--white);
+            color: var(--deep-rose);
+            border: 2px solid var(--deep-rose);
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            animation: fadeIn 0.8s ease-out 1s backwards;
+        }
+
+        .close-surprise:hover {
+            background: var(--deep-rose);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-light);
+            font-size: 1rem;
+            animation: fadeIn 1s ease-out 2.5s backwards;
+        }
+
+        footer span {
+            color: var(--deep-rose);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .rose-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .bloom-message {
+                font-size: 1.3rem;
+            }
+
+            .typewriter-text {
+                font-size: 1.3rem;
+            }
+
+            .love-notes-section h2 {
+                font-size: 2rem;
+            }
+
+            .notes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .delivery-rose {
+                font-size: 4rem;
+            }
+
+            .delivery-message {
+                font-size: 1.2rem;
+            }
+
+            .surprise-button {
+                padding: 1.2rem 2.5rem;
+                font-size: 1.1rem;
+            }
+
+            .bouquet {
+                font-size: 5rem;
+            }
+
+            .surprise-message {
+                font-size: 1.3rem;
+                padding: 0 1rem;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Roses Background -->
+    <div class="floating-roses" id="floatingRoses"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Happy Rose Day 🌹</h1>
+            <p>A special message for someone special</p>
+        </header>
+
+        <!-- Blooming Rose Section -->
+        <section class="blooming-section">
+            <div class="rose-wrapper" id="roseWrapper">
+                <div class="rose-glow" id="roseGlow"></div>
+                <div class="rose-container">
+                    <svg id="roseBloom" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Stem -->
+                        <path id="stem" d="M100 180 L100 100" stroke="#6B8E6B" stroke-width="3" fill="none"
+                            stroke-linecap="round" />
+
+                        <!-- Leaves -->
+                        <ellipse cx="85" cy="140" rx="12" ry="6" fill="#90EE90" opacity="0.8"
+                            transform="rotate(-30 85 140)" />
+                        <ellipse cx="115" cy="150" rx="12" ry="6" fill="#90EE90" opacity="0.8"
+                            transform="rotate(30 115 150)" />
+
+                        <!-- Outer Petals (will bloom outward) -->
+                        <g id="outerPetals">
+                            <ellipse class="petal outer-petal" cx="100" cy="85" rx="18" ry="28" fill="#FFB3C6"
+                                opacity="0.9" transform="rotate(0 100 100)" />
+                            <ellipse class="petal outer-petal" cx="100" cy="85" rx="18" ry="28" fill="#FF8FAB"
+                                opacity="0.9" transform="rotate(45 100 100)" />
+                            <ellipse class="petal outer-petal" cx="100" cy="85" rx="18" ry="28" fill="#FFB3C6"
+                                opacity="0.9" transform="rotate(90 100 100)" />
+                            <ellipse class="petal outer-petal" cx="100" cy="85" rx="18" ry="28" fill="#FF8FAB"
+                                opacity="0.9" transform="rotate(135 100 100)" />
+                            <ellipse class="petal outer-petal" cx="100" cy="85" rx="18" ry="28" fill="#FFB3C6"
+                                opacity="0.9" transform="rotate(180 100 100)" />
+                            <ellipse class="petal outer-petal" cx="100" cy="85" rx="18" ry="28" fill="#FF8FAB"
+                                opacity="0.9" transform="rotate(225 100 100)" />
+                            <ellipse class="petal outer-petal" cx="100" cy="85" rx="18" ry="28" fill="#FFB3C6"
+                                opacity="0.9" transform="rotate(270 100 100)" />
+                            <ellipse class="petal outer-petal" cx="100" cy="85" rx="18" ry="28" fill="#FF8FAB"
+                                opacity="0.9" transform="rotate(315 100 100)" />
+                        </g>
+
+                        <!-- Middle Petals -->
+                        <g id="middlePetals">
+                            <ellipse class="petal middle-petal" cx="100" cy="92" rx="14" ry="22" fill="#FB6F92"
+                                opacity="0.95" transform="rotate(22.5 100 100)" />
+                            <ellipse class="petal middle-petal" cx="100" cy="92" rx="14" ry="22" fill="#FFB3C6"
+                                opacity="0.95" transform="rotate(67.5 100 100)" />
+                            <ellipse class="petal middle-petal" cx="100" cy="92" rx="14" ry="22" fill="#FB6F92"
+                                opacity="0.95" transform="rotate(112.5 100 100)" />
+                            <ellipse class="petal middle-petal" cx="100" cy="92" rx="14" ry="22" fill="#FFB3C6"
+                                opacity="0.95" transform="rotate(157.5 100 100)" />
+                            <ellipse class="petal middle-petal" cx="100" cy="92" rx="14" ry="22" fill="#FB6F92"
+                                opacity="0.95" transform="rotate(202.5 100 100)" />
+                            <ellipse class="petal middle-petal" cx="100" cy="92" rx="14" ry="22" fill="#FFB3C6"
+                                opacity="0.95" transform="rotate(247.5 100 100)" />
+                            <ellipse class="petal middle-petal" cx="100" cy="92" rx="14" ry="22" fill="#FB6F92"
+                                opacity="0.95" transform="rotate(292.5 100 100)" />
+                            <ellipse class="petal middle-petal" cx="100" cy="92" rx="14" ry="22" fill="#FFB3C6"
+                                opacity="0.95" transform="rotate(337.5 100 100)" />
+                        </g>
+
+                        <!-- Inner Petals (closed bud) -->
+                        <g id="innerPetals">
+                            <ellipse class="petal inner-petal" cx="100" cy="96" rx="10" ry="16" fill="#FB6F92"
+                                transform="rotate(0 100 100)" />
+                            <ellipse class="petal inner-petal" cx="100" cy="96" rx="10" ry="16" fill="#FF8FAB"
+                                transform="rotate(60 100 100)" />
+                            <ellipse class="petal inner-petal" cx="100" cy="96" rx="10" ry="16" fill="#FB6F92"
+                                transform="rotate(120 100 100)" />
+                            <ellipse class="petal inner-petal" cx="100" cy="96" rx="10" ry="16" fill="#FF8FAB"
+                                transform="rotate(180 100 100)" />
+                            <ellipse class="petal inner-petal" cx="100" cy="96" rx="10" ry="16" fill="#FB6F92"
+                                transform="rotate(240 100 100)" />
+                            <ellipse class="petal inner-petal" cx="100" cy="96" rx="10" ry="16" fill="#FF8FAB"
+                                transform="rotate(300 100 100)" />
+                        </g>
+
+                        <!-- Center -->
+                        <circle cx="100" cy="100" r="8" fill="#FB6F92" />
+                        <circle cx="100" cy="100" r="5" fill="#FFD700" opacity="0.6" />
+                    </svg>
+                </div>
+            </div>
+            <p class="bloom-hint" id="bloomHint">Click the rose to make it bloom ✨</p>
+            <div class="bloom-message" id="bloomMessage">
+                Happy Rose Day, Vandana ❤️<br>
+                <span style="font-size: 1.2rem; font-weight: 400;">— From Krunal</span>
+            </div>
+        </section>
+
+        <!-- Typewriter Section -->
+        <section class="typewriter-section">
+            <div class="typewriter-text" id="typewriterText"></div>
+        </section>
+
+        <!-- Love Notes Section -->
+        <section class="love-notes-section">
+            <h2>Love Notes for You 💌</h2>
+            <div class="notes-grid" id="notesGrid"></div>
+        </section>
+
+        <!-- Virtual Rose Delivery -->
+        <section class="delivery-section">
+            <div class="delivery-rose" id="deliveryRose">🌹</div>
+            <div class="delivery-message" id="deliveryMessage">
+                Sending you this rose from miles away…
+            </div>
+        </section>
+
+        <!-- Surprise Section -->
+        <section class="surprise-section">
+            <button class="surprise-button" id="surpriseButton">
+                Tap for Surprise 🌹
+            </button>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            Made with <span>❤️</span> by Krunal for Vandana
+        </footer>
+    </div>
+
+    <!-- Surprise Modal -->
+    <div class="surprise-modal" id="surpriseModal">
+        <div class="surprise-content">
+            <div class="bouquet">💐</div>
+            <div class="surprise-message">
+                Vandana, on this Rose Day I just want you to know…<br><br>
+                My love for you is bigger than the miles between us, stronger than time, and deeper than anything I can
+                ever say.<br><br>
+                <strong>— Yours, Krunal ❤️</strong>
+            </div>
+            <button class="close-surprise" id="closeSurprise">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Floating Roses Animation
+        function createFloatingRoses() {
+            const container = document.getElementById('floatingRoses');
+            const roseEmojis = ['🌹', '🌺', '🌸', '💐'];
+            const numberOfRoses = 15;
+
+            for (let i = 0; i < numberOfRoses; i++) {
+                const rose = document.createElement('div');
+                rose.className = 'floating-rose';
+                rose.textContent = roseEmojis[Math.floor(Math.random() * roseEmojis.length)];
+                rose.style.left = Math.random() * 100 + '%';
+                rose.style.top = Math.random() * 100 + '%';
+                rose.style.animationDelay = Math.random() * 5 + 's';
+                rose.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(rose);
+            }
+        }
+
+        // Premium Rose Blooming Animation
+        const roseWrapper = document.getElementById('roseWrapper');
+        const roseBloom = document.getElementById('roseBloom');
+        const roseGlow = document.getElementById('roseGlow');
+        const bloomMessage = document.getElementById('bloomMessage');
+        const bloomHint = document.getElementById('bloomHint');
+        let isBloomedState = false;
+        let hasBloomedOnce = false;
+
+        function bloomRose() {
+            if (isBloomedState) return;
+
+            // Add blooming class
+            roseBloom.classList.add('blooming');
+            roseGlow.classList.add('active');
+
+            // Animate petals
+            const outerPetals = document.querySelectorAll('.outer-petal');
+            const middlePetals = document.querySelectorAll('.middle-petal');
+            const innerPetals = document.querySelectorAll('.inner-petal');
+
+            // Outer petals bloom outward
+            outerPetals.forEach((petal, index) => {
+                setTimeout(() => {
+                    petal.style.transition = 'all 1s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    petal.setAttribute('cy', '70');
+                    petal.setAttribute('rx', '22');
+                    petal.setAttribute('ry', '35');
+                }, index * 50);
+            });
+
+            // Middle petals open
+            middlePetals.forEach((petal, index) => {
+                setTimeout(() => {
+                    petal.style.transition = 'all 1s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    petal.setAttribute('cy', '85');
+                    petal.setAttribute('rx', '16');
+                    petal.setAttribute('ry', '26');
+                }, index * 50 + 200);
+            });
+
+            // Inner petals slightly open
+            innerPetals.forEach((petal, index) => {
+                setTimeout(() => {
+                    petal.style.transition = 'all 1s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    petal.setAttribute('cy', '94');
+                    petal.setAttribute('rx', '12');
+                    petal.setAttribute('ry', '18');
+                }, index * 50 + 400);
+            });
+
+            // Show message
+            setTimeout(() => {
+                bloomMessage.classList.add('show');
+            }, 800);
+
+            // Create falling petals
+            setTimeout(() => {
+                createFallingPetals();
+            }, 1000);
+
+            if (!hasBloomedOnce) {
+                bloomHint.style.opacity = '0';
+                hasBloomedOnce = true;
+            }
+
+            isBloomedState = true;
+        }
+
+        function closeRose() {
+            if (!isBloomedState) return;
+
+            roseBloom.classList.remove('blooming');
+            roseGlow.classList.remove('active');
+
+            const outerPetals = document.querySelectorAll('.outer-petal');
+            const middlePetals = document.querySelectorAll('.middle-petal');
+            const innerPetals = document.querySelectorAll('.inner-petal');
+
+            outerPetals.forEach(petal => {
+                petal.setAttribute('cy', '85');
+                petal.setAttribute('rx', '18');
+                petal.setAttribute('ry', '28');
+            });
+
+            middlePetals.forEach(petal => {
+                petal.setAttribute('cy', '92');
+                petal.setAttribute('rx', '14');
+                petal.setAttribute('ry', '22');
+            });
+
+            innerPetals.forEach(petal => {
+                petal.setAttribute('cy', '96');
+                petal.setAttribute('rx', '10');
+                petal.setAttribute('ry', '16');
+            });
+
+            bloomMessage.classList.remove('show');
+            isBloomedState = false;
+        }
+
+        function createFallingPetals() {
+            const container = document.querySelector('.rose-container');
+            const petalColors = [
+                ['#FFB3C6', '#FF8FAB'],
+                ['#FF8FAB', '#FB6F92'],
+                ['#FFE5EC', '#FFB3C6']
+            ];
+
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'falling-petal';
+
+                    const colors = petalColors[Math.floor(Math.random() * petalColors.length)];
+
+                    // Create SVG petal
+                    petal.innerHTML = `
+                        <svg viewBox="0 0 50 70" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="petalGrad${i}" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:${colors[0]};stop-opacity:0.95" />
+                                    <stop offset="100%" style="stop-color:${colors[1]};stop-opacity:0.9" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M 25 5 Q 5 15, 10 40 Q 15 60, 25 70 Q 35 60, 40 40 Q 45 15, 25 5 Z" 
+                                  fill="url(#petalGrad${i})" 
+                                  stroke="${colors[1]}" 
+                                  stroke-width="0.5"
+                                  opacity="0.95"/>
+                        </svg>
+                    `;
+
+                    petal.style.left = (60 + (Math.random() * 120)) + 'px';
+                    petal.style.top = '40px';
+                    petal.style.animation = `petalFall ${2.5 + Math.random() * 2}s ease-out forwards`;
+                    container.appendChild(petal);
+
+                    setTimeout(() => petal.remove(), 5000);
+                }, i * 150);
+            }
+        }
+
+        // Click/Touch handler
+        roseWrapper.addEventListener('click', () => {
+            if (!isBloomedState) {
+                bloomRose();
+            } else {
+                closeRose();
+            }
+        });
+
+        // Typewriter Effect
+        const typewriterText = document.getElementById('typewriterText');
+        const text = "On this Rose Day, my heart blooms only for you, Vandana.";
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < text.length) {
+                typewriterText.textContent = text.substring(0, charIndex + 1);
+                charIndex++;
+                setTimeout(typeWriter, 80);
+            }
+        }
+
+        setTimeout(typeWriter, 1000);
+
+        // Love Notes
+        const loveNotes = [
+            { icon: '💖', message: 'You make everything feel beautiful.' },
+            { icon: '🌟', message: 'Distance means nothing when someone means everything.' },
+            { icon: '💫', message: 'You are my favorite feeling.' },
+            { icon: '✨', message: 'I choose you, always.' },
+            { icon: '🌹', message: 'You make my life sweeter, Vandana.' },
+            { icon: '💝', message: 'One day, all this distance will become our story.' },
+            { icon: '🎀', message: 'Every moment with you is a treasure.' },
+            { icon: '💗', message: 'You are the reason I believe in love.' }
+        ];
+
+        const notesGrid = document.getElementById('notesGrid');
+
+        loveNotes.forEach((note) => {
+            const noteCard = document.createElement('div');
+            noteCard.className = 'note-card';
+            noteCard.innerHTML = `
+                <div class="note-content">
+                    <div class="note-front">
+                        <div class="note-icon">${note.icon}</div>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">Click to reveal</p>
+                    </div>
+                    <div class="note-back">${note.message}</div>
+                </div>
+            `;
+
+            noteCard.addEventListener('click', () => {
+                noteCard.classList.toggle('revealed');
+            });
+
+            notesGrid.appendChild(noteCard);
+        });
+
+        // Virtual Rose Delivery
+        const deliveryRose = document.getElementById('deliveryRose');
+        const deliveryMessage = document.getElementById('deliveryMessage');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    deliveryRose.classList.add('delivering');
+                    deliveryMessage.classList.add('show');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.querySelector('.delivery-section'));
+
+        // Surprise Modal
+        const surpriseButton = document.getElementById('surpriseButton');
+        const surpriseModal = document.getElementById('surpriseModal');
+        const closeSurprise = document.getElementById('closeSurprise');
+
+        surpriseButton.addEventListener('click', () => {
+            surpriseModal.classList.add('active');
+        });
+
+        closeSurprise.addEventListener('click', () => {
+            surpriseModal.classList.remove('active');
+        });
+
+        // Initialize
+        createFloatingRoses();
+    </script>
+</body>
+
+</html>
